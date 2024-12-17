@@ -1,5 +1,6 @@
 package com.generation.yourfood.model;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -30,7 +31,7 @@ public class Produto {
 	private String descricao;
 
 	@Positive(message = "O preço deve ser um valor positivo!")
-	private Long preco;
+    private Long preco;
 
 	@NotNull(message = "O atributo loja é obrigatório!")
 	private String loja;

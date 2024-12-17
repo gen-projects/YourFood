@@ -68,12 +68,11 @@ public class ProdutoController {
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		Optional<Produto> produto = produtoRepository.findById(id);
-		
-		if(produto.isEmpty()) {
-			
-		}
+
+		if (produto.isEmpty()) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
-		
+
 		produtoRepository.deleteById(id);
 	}
+}

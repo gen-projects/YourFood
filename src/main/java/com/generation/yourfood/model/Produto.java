@@ -1,13 +1,8 @@
 package com.generation.yourfood.model;
 
-import java.math.BigDecimal;
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,15 +26,14 @@ public class Produto {
 	private String descricao;
 
 	@Positive(message = "O preço deve ser um valor positivo!")
-    private Long preco;
+	private Long preco;
 
 	@NotNull(message = "O atributo loja é obrigatório!")
 	private String loja;
 
-	// @ManyToOne(fetch = FetchType.LAZY, mappedBy = "produto", cascade =
-	// CascadeType.REMOVE)
-	// @JsonIgnoreProperties("produto")
-	// private List<Categoria> categoria;
+	@ManyToOne
+	@JsonIgnoreProperties("produto")
+	private Categoria categoria;
 
 	public Long getId() {
 		return id;
@@ -79,6 +73,14 @@ public class Produto {
 
 	public void setLoja(String loja) {
 		this.loja = loja;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 }

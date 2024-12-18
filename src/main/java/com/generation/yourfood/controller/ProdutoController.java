@@ -20,16 +20,20 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.generation.yourfood.model.Produto;
 import com.generation.yourfood.repository.ProdutoRepository;
+import com.generation.yourfood.service.ProdutoService;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/produto")
+@RequestMapping("/produtos")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProdutoController {
 
 	@Autowired
 	public ProdutoRepository produtoRepository;
+	
+	@Autowired
+	public ProdutoService produtoService;
 
 	@GetMapping
 	public ResponseEntity<List<Produto>> getAll() {
@@ -50,6 +54,11 @@ public class ProdutoController {
 	@GetMapping("/preco/{preco}")
 	public ResponseEntity<List<Produto>> getByPreco(@PathVariable Long preco) {
 		return ResponseEntity.ok(produtoRepository.findByPrecoGreaterThanEqual(preco));
+	}
+	
+	@GetMapping("/recomendacoes")
+	public ResponseEntity<List<Produto>> getRecomendacao() {
+		return ResponseEntity.ok(produtoService.recomendacao());
 	}
 
 	@PostMapping

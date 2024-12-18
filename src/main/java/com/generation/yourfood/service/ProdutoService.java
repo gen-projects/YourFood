@@ -21,16 +21,16 @@ public class ProdutoService {
 		
 		Random randomNumbers = new Random();
 		
-		produtosRepository.findAll().forEach(produto -> {
-			randomNumbers.nextInt();
-			
-			//if(produto.getCategoria().getIsSaudavel()) {
-				
-				
-			//	listaSaudaveis.add(produto);
-			//}
-		});
-	
+		List<Produto> produtos = produtosRepository.findAll();
+		
+		for(int i=0; i<produtos.size(); i++) {
+			if(produtos.get(i).getCategoria().isSaudavel()) {
+				if(randomNumbers.nextBoolean()) {
+					listaSaudaveis.add(produtos.get(i));
+				}
+			}
+			if(listaSaudaveis.size() == 3) break;
+		}
 		
 		return listaSaudaveis;
 	}

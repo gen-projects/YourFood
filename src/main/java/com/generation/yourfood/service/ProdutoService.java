@@ -21,15 +21,17 @@ public class ProdutoService {
 		
 		Random randomNumbers = new Random();
 		
-		List<Produto> produtos = produtosRepository.findAll();
+		List<Produto> produtos = produtosRepository.findByCategoria_SaudavelTrue();
 		
-		for(int i=0; i<produtos.size(); i++) {
-			if(produtos.get(i).getCategoria().isSaudavel()) {
-				if(randomNumbers.nextBoolean()) {
-					listaSaudaveis.add(produtos.get(i));
-				}
-			}
-			if(listaSaudaveis.size() == 3) break;
+		if(produtos.size() <= 3) {
+			return produtos;
+		}
+		
+		while(listaSaudaveis.size() < 3) {
+			int random = randomNumbers.nextInt(produtos.size());
+			
+			listaSaudaveis.add(produtos.get(random));
+			produtos.remove(random);
 		}
 		
 		return listaSaudaveis;

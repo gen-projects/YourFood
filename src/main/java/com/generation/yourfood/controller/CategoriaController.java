@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/categorias")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CategoriaController {
 
     @Autowired
@@ -34,6 +35,11 @@ public class CategoriaController {
         Optional<Categoria> categoria = categoriaRepository.findById(id);
         return categoria.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
+    
+	@GetMapping("/descricao/{descricao}")
+	public ResponseEntity<List<Categoria>> getByTitulo(@PathVariable String descricao){
+		return ResponseEntity.ok(categoriaRepository.findAllByDescricaoContainingIgnoreCase(descricao));
+	}
 
     @PutMapping("/{id}")
     public ResponseEntity<Categoria> atualizarCategoria(@PathVariable Long id, @RequestBody Categoria categoria) {

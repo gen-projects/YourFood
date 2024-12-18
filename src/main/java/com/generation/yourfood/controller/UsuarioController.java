@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,11 +21,14 @@ import com.generation.yourfood.model.UsuarioLogin;
 import com.generation.yourfood.repository.UsuarioRepository;
 import com.generation.yourfood.service.UsuarioService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping("/usuarios")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@Tag(name = "Usuarios", description = "Operações relacionadas aos usuários")
 public class UsuarioController {
 
 	@Autowired
@@ -33,7 +37,9 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
-	
+	@Operation(
+		    summary = "Buscar todos os usuários", 
+		    description = "Este endpoint retorna uma lista de todos os usuários em formato JSON.")
 	@GetMapping("/all")
 	public ResponseEntity<List<Usuario>> getAll(){
 		return ResponseEntity.ok(usuarioRepository.findAll());
@@ -63,7 +69,9 @@ public class UsuarioController {
 
 	}
 	
-	@PutMapping("/atualizar")
+	@PutMapping(value = "/atualizar",
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+	        produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Usuario> putUsuario(@Valid @RequestBody Usuario usuario) {
 		
 		return usuarioService.atualizarUsuario(usuario)

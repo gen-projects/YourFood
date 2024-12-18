@@ -68,10 +68,10 @@ Este repositório reúne os testes realizados para a API de gerenciamento de ped
 - Spring Data JPA  
 - MySQL Driver  
 
-## Autores
 
-- [@Martinelii](https://www.github.com/Martinelii)
-- [@biancasuarz](https://www.github.com/biancasuarz)
-- [@Kagradiel](https://www.github.com/Kagradiel)
-- [@DandaraaAfroo](https://www.github.com/DandaraaAfroo)
-- [@GabrielJonatas](https://www.github.com/GabrielJonatas)
+## Colaboradores
+
+| [![Martinelii](https://github.com/Martinelii.png?size=100)](https://github.com/Martinelii) | [![biancasuarz](https://github.com/biancasuarz.png?size=100)](https://github.com/biancasuarz) | [![Kagradiel](https://github.com/Kagradiel.png?size=100)](https://github.com/Kagradiel) | [![DandaraaAfroo](https://github.com/DandaraaAfroo.png?size=100)](https://github.com/DandaraaAfroo) | [![GabrielJonatas](https://github.com/GabrielJonatas.png?size=100)](https://github.com/GabrielJonatas) |
+| :---------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------: |
+| [Martinelii](https://github.com/Martinelii)                                               | [biancasuarz](https://github.com/biancasuarz)                                                | [Kagradiel](https://github.com/Kagradiel)                                               | [DandaraaAfroo](https://github.com/DandaraaAfroo)                                                | [GabrielJonatas](https://github.com/GabrielJonatas)                                                |
+

@@ -40,19 +40,27 @@ public class UsuarioController {
 	@Operation(
 		    summary = "Buscar todos os usuários", 
 		    description = "Este endpoint retorna uma lista de todos os usuários em formato JSON.")
-	@GetMapping("/all")
+	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Usuario>> getAll(){
 		return ResponseEntity.ok(usuarioRepository.findAll());
 	}
 	
-	@GetMapping("/{id}")
+	@Operation(
+	        summary = "Buscar usuário por ID", 
+	        description = "Este endpoint retorna os detalhes de um usuário baseado no seu ID")
+	@GetMapping(value = "/{id}" , produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Usuario> getById(@PathVariable Long id){
 		return usuarioRepository.findById(id)
 				.map(resposta -> ResponseEntity.ok(resposta))
 				.orElse(ResponseEntity.notFound().build());
 		}
 	
-	@PostMapping("/logar")
+	@Operation(
+		    summary = "Autenticar usuário", 
+		    description = "Este endpoint realiza a autenticação de um usuário utilizando suas credenciais (usuário e senha). Retorna um token de autenticação se as credenciais forem válidas, ou um erro 401 (não autorizado) caso contrário.")
+	@PostMapping(value = "/logar",
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+	        produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UsuarioLogin> autenticarUsuario(@RequestBody Optional<UsuarioLogin> usuarioLogin){
 		
 		return usuarioService.autenticarUsuario(usuarioLogin)
@@ -60,7 +68,12 @@ public class UsuarioController {
 				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
 	}
 	
-	@PostMapping("/cadastrar")
+	@Operation(
+		    summary = "Cadastrar um novo usuário", 
+		    description = "Este endpoint permite o cadastro de um novo usuário no sistema. Recebe os dados do usuário em formato JSON e retorna o usuário cadastrado em caso de sucesso.")
+	@PostMapping(value = "/cadastrar",
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+	        produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Usuario> postUsuario(@RequestBody @Valid Usuario usuario) {
 
 		return usuarioService.cadastrarUsuario(usuario)
@@ -69,6 +82,9 @@ public class UsuarioController {
 
 	}
 	
+	@Operation(
+		    summary = "Atualizar os dados de um usuário", 
+		    description = "Este endpoint permite a atualização dos dados de um usuário existente no sistema. Recebe as novas informações do usuário em formato JSON e retorna os dados atualizados ou um erro 404 (não encontrado) se o usuário não existir.")
 	@PutMapping(value = "/atualizar",
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 	        produces = MediaType.APPLICATION_JSON_VALUE)

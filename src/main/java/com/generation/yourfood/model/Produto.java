@@ -2,6 +2,7 @@ package com.generation.yourfood.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,18 +18,23 @@ public class Produto {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Schema(description = "Id da produto", example = "1")
 	private Long id;
 
 	@NotNull(message = "O atributo nome é obrigatório!")
+	@Schema(description = "Nome do produto", example = "Maçã")
 	private String nome;
 
 	@NotNull(message = "O atributo descrição é obrigatório!")
+	@Schema(description = "Descrição do produto", example = "Maçã Fuji")
 	private String descricao;
 
 	@Positive(message = "O preço deve ser um valor positivo!")
+	@Schema(description = "Preço do produto em centavos", example = "500")
 	private Long preco;
 
 	@NotNull(message = "O atributo loja é obrigatório!")
+	@Schema(description = "Nome da loja", example = "HortiNature")
 	private String loja;
 
 	@ManyToOne

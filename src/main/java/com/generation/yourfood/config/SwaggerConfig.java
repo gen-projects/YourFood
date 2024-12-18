@@ -6,6 +6,7 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.responses.ApiResponse;
 import io.swagger.v3.oas.models.responses.ApiResponses;
+import io.swagger.v3.oas.models.servers.Server;
 
 import org.springdoc.core.customizers.OpenApiCustomizer;
 import org.springframework.context.annotation.Bean;
@@ -15,12 +16,18 @@ import org.springframework.context.annotation.Configuration;
 public class SwaggerConfig {
 
     @Bean
-    public OpenAPI customOpenAPI() {
+    OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
                         .title("API YourFood")
                         .version("1.0")
                         .description("Documentação interativa para a api do projeto de delivery de comida YourFood"))
+                .addServersItem(new Server()
+                		.url("https://yourfood-7qs2.onrender.com/")
+                		.description("Servidor de Produção"))
+                .addServersItem(new Server()
+                		.url("http://localhost:8080")
+                		.description("Servidor de Desenvolvimento"))
                 .externalDocs(new ExternalDocumentation()
                 		.description("Github")
                 		.url("https://github.com/gen-projects/YourFood"));

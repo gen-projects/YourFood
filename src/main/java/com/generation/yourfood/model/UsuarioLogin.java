@@ -24,7 +24,6 @@ public class UsuarioLogin {
 	@Schema(description = "Foto do usuario", example = "https://i.imgur.com/Tk9f10k.png")
 	private String foto;
 	
-	@JsonIgnore
 	@Schema(description = "token do usuario", example = "")
 	private String token;
 

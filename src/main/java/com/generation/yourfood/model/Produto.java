@@ -11,6 +11,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "tb_produtos")
@@ -36,6 +37,10 @@ public class Produto {
 	@NotNull(message = "O atributo loja é obrigatório!")
 	@Schema(description = "Nome da loja", example = "HortiNature")
 	private String loja;
+	
+	@Size(max = 5000, message = "O link da foto não pode ser maior que 5000 caracteres")
+	@Schema(description = "Foto do produto", example = "https://i.imgur.com/Tk9f10k.png")
+	private String foto;
 
 	@ManyToOne
 	@JsonIgnoreProperties("produto")
@@ -44,7 +49,15 @@ public class Produto {
 	@ManyToOne
 	@JsonIgnoreProperties("produto")
 	private Usuario usuario;
+	
+	public String getFoto() {
+		return foto;
+	}
 
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+	
 	public Usuario getUsuario() {
 		return usuario;
 	}

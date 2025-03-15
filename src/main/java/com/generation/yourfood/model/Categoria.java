@@ -15,6 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "tb_categorias")
@@ -37,7 +38,19 @@ public class Categoria {
 	@JsonIgnoreProperties("categoria")
 	private List<Produto> produto;
     
-    public Long getId() {
+	@Size(max = 5000, message = "O link da foto não pode ser maior que 5000 caracteres")
+	@Schema(description = "Foto da categoria", example = "https://i.imgur.com/Tk9f10k.png")
+	private String foto;
+	
+    public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public Long getId() {
         return id;
     }
 
